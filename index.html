@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#e9edee" />
+    <meta
+      name="description"
+      content="Interactive prototype for Tapsi driver IBAN inquiry add and edit flows."
+    />
+    <title>IBAN Inquiry Prototype</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="workbench" aria-label="IBAN inquiry prototype">
+      <div id="deviceWrap" class="device-wrap">
+        <div id="device" class="device" aria-label="Simulated Android device">
+          <div id="appRoot" class="app-root" dir="rtl"></div>
+        </div>
+      </div>
+    </main>
+
+    <button
+      id="controlLauncher"
+      class="control-launcher"
+      type="button"
+      aria-controls="controlPanel"
+      aria-expanded="false"
+      aria-label="Open prototype controls"
+      title="Prototype controls"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 7h10M18 7h2M4 17h2M10 17h10M14 4v6M8 14v6" />
+      </svg>
+    </button>
+
+    <aside
+      id="controlPanel"
+      class="control-panel"
+      role="dialog"
+      aria-modal="false"
+      aria-labelledby="controlTitle"
+      hidden
+    >
+      <header class="control-header">
+        <div>
+          <p class="eyebrow">Simulation</p>
+          <h1 id="controlTitle">Control center</h1>
+        </div>
+        <button id="controlClose" class="icon-button" type="button" aria-label="Close controls">×</button>
+      </header>
+
+      <div class="control-body">
+        <fieldset class="control-group">
+          <legend>Flow</legend>
+          <div class="segmented" data-control-group="flow">
+            <button type="button" data-control="flow" data-value="add" aria-pressed="true">Add</button>
+            <button type="button" data-control="flow" data-value="edit" aria-pressed="false">Edit</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="control-group">
+          <legend>Inquiry result</legend>
+          <div class="segmented" data-control-group="outcome">
+            <button type="button" data-control="outcome" data-value="success" aria-pressed="true">Success</button>
+            <button type="button" data-control="outcome" data-value="failure" aria-pressed="false">Failure</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="control-group">
+          <legend>Timeout</legend>
+          <div class="segmented" data-control-group="delay">
+            <button type="button" data-control="delay" data-value="3000" aria-pressed="true">3 sec</button>
+            <button type="button" data-control="delay" data-value="5000" aria-pressed="false">5 sec</button>
+          </div>
+        </fieldset>
+
+        <label class="select-label" for="devicePreset">Device viewport</label>
+        <select id="devicePreset" class="device-select">
+          <option value="reference">Reference Android · 360 × 800</option>
+          <option value="galaxy-s8">Galaxy S8+ · 360 × 740</option>
+          <option value="galaxy-s20">Galaxy S20 Ultra · 412 × 915</option>
+          <option value="pixel-5">Pixel 5 · 393 × 851</option>
+          <option value="pixel-7">Pixel 7 · 412 × 915</option>
+        </select>
+
+        <div class="control-meta" aria-live="polite">
+          <span>Current screen</span>
+          <strong id="currentState">Add · IBAN entry</strong>
+        </div>
+
+        <button id="resetPrototype" class="reset-button" type="button">Reset prototype</button>
+      </div>
+    </aside>
+
+    <div id="liveRegion" class="sr-only" aria-live="polite"></div>
+
+    <noscript>This prototype requires JavaScript to simulate the inquiry flow.</noscript>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
