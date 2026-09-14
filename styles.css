@@ -458,7 +458,7 @@ select:focus-visible {
 }
 
 .text-action {
-  align-self: center;
+  display: block;
   margin: 17px auto 0;
   padding: 5px 14px;
   border: 0;

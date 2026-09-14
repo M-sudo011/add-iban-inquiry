@@ -214,7 +214,6 @@
 
     return `
       ${ibanField({ label: "شماره شبا یا شماره‌ی اوزون کارت", readonly: loading, disabled: loading })}
-      <p class="helper-text">حساب می‌تواند به نام خودتان یا شخص دیگری باشد.</p>
       ${primaryButton(loading ? "در حال استعلام…" : "استعلام حساب", "inquire", {
         disabled: loading || !isIbanReady(),
         loading,
@@ -270,13 +269,11 @@
           ${textField({ label: "نام", field: "manualFirstName", value: state.manualFirstName })}
           ${textField({ label: "نام خانوادگی", field: "manualLastName", value: state.manualLastName })}
           ${ibanField({ label: "شماره شبا یا شماره‌ی اوزون کارت", readonly: true })}
-          <p class="helper-text">
-            ${
-              state.flow === "edit"
-                ? "اطلاعات حساب جدید توسط بانک بررسی نشده است. حساب فعلی پس از ذخیره جایگزین می‌شود."
-                : "نام واردشده توسط بانک بررسی و تایید نمی‌شود."
-            }
-          </p>
+          ${
+            state.flow === "edit"
+              ? '<p class="helper-text">اطلاعات حساب جدید توسط بانک بررسی نشده است. حساب فعلی پس از ذخیره جایگزین می‌شود.</p>'
+              : ""
+          }
           ${primaryButton(state.flow === "edit" ? "ذخیره تغییرات" : "تایید", "save-manual", {
             disabled: !state.manualFirstName.trim() || !state.manualLastName.trim(),
           })}
