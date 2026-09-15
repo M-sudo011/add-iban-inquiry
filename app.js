@@ -206,7 +206,7 @@
         ${currentAccountCard()}
         ${ibanField({ label: "شماره شبای جدید", readonly: loading, disabled: loading })}
         <p class="helper-text">حساب فعلی تا زمان ذخیره تغییرات حفظ می‌شود.</p>
-        ${primaryButton(loading ? "در حال استعلام…" : "استعلام حساب جدید", "inquire", {
+        ${primaryButton(loading ? "در حال دریافت اطلاعات" : "دریافت اطلاعات حساب", "inquire", {
           disabled: loading || !isIbanReady(),
           loading,
         })}`;
@@ -214,7 +214,7 @@
 
     return `
       ${ibanField({ label: "شماره شبا یا شماره‌ی اوزون کارت", readonly: loading, disabled: loading })}
-      ${primaryButton(loading ? "در حال استعلام…" : "استعلام حساب", "inquire", {
+      ${primaryButton(loading ? "در حال دریافت اطلاعات" : "دریافت اطلاعات حساب", "inquire", {
         disabled: loading || !isIbanReady(),
         loading,
       })}`;
@@ -242,7 +242,7 @@
           <div class="result-row"><span>بانک</span><strong>${result.bank}</strong></div>
         </section>
         <p class="helper-text helper-text--compact">متفاوت بودن نام دارنده حساب با نام راننده مانع ثبت حساب نیست.</p>
-        ${primaryButton(state.flow === "edit" ? "ذخیره تغییرات" : "تایید حساب", "save-success")}
+        ${primaryButton(state.flow === "edit" ? "ذخیره تغییرات" : "اضافه کردن حساب", "save-success")}
         ${secondaryButton("ویرایش شماره شبا", "edit-iban")}
       </main>`;
   }
@@ -251,13 +251,12 @@
     return `
       ${errorBanner(state.flow === "edit" ? "استعلام حساب جدید انجام نشد" : "استعلام حساب انجام نشد")}
       <main class="app-content app-content--under-toast">
-        ${ibanField({ label: "شماره شبا", readonly: true })}
+        ${ibanField({ label: "شماره شبا" })}
         <p class="helper-text helper-text--compact">در حال حاضر امکان دریافت اطلاعات این حساب وجود ندارد.</p>
         <p class="helper-text helper-text--compact">این خطا به معنی نامعتبر بودن شماره شبا نیست.</p>
         ${state.flow === "edit" ? '<p class="helper-text">حساب فعلی تا زمان ذخیره تغییرات بدون تغییر می‌ماند.</p>' : ""}
-        ${primaryButton("تلاش مجدد", "retry")}
-        ${secondaryButton("ادامه بدون استعلام", "continue-manual")}
-        <button class="text-action" type="button" data-action="edit-iban">ویرایش شماره شبا</button>
+        ${primaryButton("تلاش مجدد", "retry", { disabled: !isIbanReady() })}
+        ${secondaryButton("وارد کردن دستی اطلاعات", "continue-manual")}
       </main>`;
   }
 
@@ -458,7 +457,7 @@
       state.iban = normalizeDigits(event.target.value);
       state.validationError = false;
       event.target.value = formatIban(state.iban);
-      const button = elements.appRoot.querySelector('[data-action="inquire"]');
+      const button = elements.appRoot.querySelector('[data-action="inquire"], [data-action="retry"]');
       if (button) button.disabled = !isIbanReady();
       return;
     }
