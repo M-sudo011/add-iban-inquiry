@@ -179,7 +179,7 @@
       <button class="primary-button" type="button" data-action="${escapeHtml(action)}" ${disabled ? "disabled" : ""}>
         ${
           loading
-            ? `<span class="loading-row"><span class="spinner" aria-hidden="true"></span><span>${escapeHtml(label)}</span></span>`
+            ? `<span class="loading-row"><span>${escapeHtml(label)}</span><span class="spinner" aria-hidden="true"></span></span>`
             : escapeHtml(label)
         }
       </button>`;
@@ -265,9 +265,9 @@
       ${appHeader(state.flow === "edit" ? "ویرایش شماره شبا" : "افزودن شماره شبا")}
       <main class="app-content">
         <div class="form-stack">
+          ${ibanField({ label: "شماره شبا یا شماره‌ی اوزون کارت", readonly: true })}
           ${textField({ label: "نام", field: "manualFirstName", value: state.manualFirstName })}
           ${textField({ label: "نام خانوادگی", field: "manualLastName", value: state.manualLastName })}
-          ${ibanField({ label: "شماره شبا یا شماره‌ی اوزون کارت", readonly: true })}
           ${
             state.flow === "edit"
               ? '<p class="helper-text">اطلاعات حساب جدید توسط بانک بررسی نشده است. حساب فعلی پس از ذخیره جایگزین می‌شود.</p>'

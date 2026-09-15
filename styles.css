@@ -445,8 +445,8 @@ select:focus-visible {
 .spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.42);
-  border-top-color: var(--white);
+  border: 2px solid rgba(12, 47, 111, 0.35);
+  border-top-color: #153f91;
   border-radius: 50%;
   animation: spin 700ms linear infinite;
 }
